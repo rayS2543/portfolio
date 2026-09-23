@@ -17,10 +17,10 @@ The original source projects were read only. Copies of the Catwatch walkthrough 
 
 ## Status
 
-Local preview only; no deployment or commits. Project cover typography is not a product screenshot. The Catwatch walkthrough is explicitly scripted; no camera, inference, private footage, credentials, or model weights are included. Research limitations and unimplemented features are distinguished in each case study.
+Published as a public GitHub repository. The Catwatch walkthrough is explicitly scripted; no camera, inference, private footage, credentials, or model weights are included. Research limitations and unimplemented features are distinguished in each case study.
 
 The site retains the user's typed surname, Siguenica, pending confirmation of the résumé spelling, Siguencia.
 
 ## Verification
 
-JavaScript syntax checks; browser checks for animation pause/resume, reduced motion, project dialog content and Escape dismissal, local demo navigation, image loading, and responsive widths 320–1200px.
+JavaScript syntax checks; browser checks for animation pause/resume, reduced motion, expandable technical notes, local demo navigation, image loading, and responsive widths 320–1200px.
