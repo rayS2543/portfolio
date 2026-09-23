@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Raymond Siguenica — Software engineer. Explore Catwatch, Straydar, and Match Tracker.">
+  <meta name="theme-color" content="#101113">
+  <title>Raymond Siguenica — Software Engineer</title>
+  <link rel="stylesheet" href="style.css?v=20260923">
+  <script src="script.js?v=20260923" defer></script>
+</head>
+<body>
+  <a class="skip" href="#work">Skip to work</a>
+  <header class="site-header wrap">
+    <a class="wordmark" href="#top" aria-label="Raymond Siguenica, home">R<span class="wordmark-slash">/</span>S</a>
+    <nav aria-label="Main navigation"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact <span aria-hidden="true">↗</span></a></nav>
+  </header>
+  <main id="top">
+    <section class="intro wrap" aria-labelledby="intro-title">
+      <div class="hero-composition"><div class="intro-heading"><span class="eyebrow">Software engineer</span><h1 id="intro-title">Raymond<br><span>Siguenica.</span></h1></div><div class="motion-visual"><canvas id="flow-canvas" aria-hidden="true"></canvas><button id="motion-toggle" type="button" aria-pressed="false">Pause animation</button></div></div>
+      <div class="intro-bottom"><p>Full-stack applications.<br>Computer vision. Real-world systems.</p><a href="#work" class="explore">Explore projects <span aria-hidden="true">↓</span></a></div>
+    </section>
+    <section id="work" class="work wrap" aria-labelledby="work-title">
+      <div class="section-heading"><h2 id="work-title">Selected projects</h2><span>Catwatch / Straydar / Match Tracker</span></div>
+      <article class="study" id="catwatch">
+        <div class="study-heading"><span class="project-number">01 / COMPUTER VISION</span><h3>Catwatch</h3><p>Understanding what the camera sees.</p></div>
+        <div class="vision-stage" aria-label="Catwatch inference architecture"><div class="pipeline-top"><span>Catwatch / inference pipeline</span><span>Local processing</span></div><div class="pipeline"><div><span>01</span><strong>Detect</strong><small>YOLOv8s<br>Cat presence</small></div><i aria-hidden="true">→</i><div><span>02</span><strong>Observe</strong><small>MobileNetV3<br>Visual features</small></div><i aria-hidden="true">→</i><div><span>03</span><strong>Decide</strong><small>Ridge classifier<br>Predict or abstain</small></div></div><div class="pipeline-bottom"><span>8 behavior labels</span><span>Explicit corrections → local feedback</span></div></div>
+        <div class="study-body"><p class="study-lead">A desktop vision system with room for uncertainty—and a way for the user to correct it.</p><div><p>I built a native application that detects cats, classifies behavior, and records transitions in a session timeline. Inference runs in a worker to keep the interface responsive.</p><p>A validation-selected confidence margin lets the model withhold ambiguous predictions. Corrections save a frame and structured feedback locally.</p><div class="study-links"><a href="demos/catwatch/index.html">Explore walkthrough ↗</a></div><p class="fine">Scripted browser demo; no camera access or live inference.</p></div></div>
+        <details class="engineering"><summary>Model evaluation & technical notes <span aria-hidden="true">+</span></summary><div><p>A frozen MobileNetV3 encoder feeds a class-balanced ridge classifier over pooled visual features. On 543 held-out MEOW-10K clips, it achieved 37.9% accuracy against a 19.0% majority baseline. These dataset results do not establish live-camera accuracy.</p><p>Feedback is saved explicitly and does not automatically retrain the model. A separate earlier CLI pipeline handles rule-based events and optional AWS storage and notifications.</p></div></details>
+        <p class="technology">Python / PyTorch / YOLOv8 / PySide6 / OpenCV</p>
+      </article>
+      <article class="study stray-study" id="straydar">
+        <div class="study-heading"><span class="project-number">02 / GEOSPATIAL APPLICATION</span><h3>Straydar</h3><p>A sighting becomes a shared record.</p></div>
+        <div class="stray-layout"><figure class="product-shot"><img src="assets/straydar-report.png" alt="Straydar missing-cat reporting interface with location map and report fields" width="900" height="900" loading="lazy"><figcaption>Missing-cat reporting / application screenshot</figcaption></figure><div class="stray-copy"><p class="study-lead">Helping neighbors connect the dots around stray and missing cats.</p><p>I built a shared map, community feed, and dedicated missing-cat reporting flow with persistent records and realtime updates through Supabase.</p><div class="decision"><span>THE INTERESTING PART</span><h4>Match before duplicating.</h4><p>Nearby sightings within 150 meters are grouped by cat, then ranked using temperament and shared description terms. Suggestions have an explainable reason behind them.</p></div><div class="study-links"><a href="https://straydar.vercel.app" target="_blank" rel="noopener noreferrer">Live site ↗</a><a href="https://github.com/rayS2543/straydar" target="_blank" rel="noopener noreferrer">Source ↗</a></div></div></div>
+        <details class="engineering"><summary>Rescue guidance & implementation notes <span aria-hidden="true">+</span></summary><div><p>The rescue assistant provides predefined guidance with optional Claude responses. Emergency vet information comes from OpenStreetMap with a fallback list. Matching is deterministic, not machine learning.</p><p>This is a development-stage application; authentication and access policies still need production hardening.</p><img class="assistant-preview" src="assets/straydar-assistant.png" alt="Straydar rescue assistant offering guidance for a skittish cat" width="384" height="688" loading="lazy"></div></details>
+        <p class="technology">React / Supabase / Postgres / Realtime / Leaflet</p>
+      </article>
+      <article class="study" id="match-tracker">
+        <div class="study-heading"><span class="project-number">03 / SPORTS DATA PLATFORM</span><h3>Match Tracker</h3><p>Five leagues. One place to follow them.</p></div>
+        <div class="league-stage"><span class="stage-label">COVERAGE / EUROPEAN FOOTBALL</span><div class="league-list"><span>Premier League</span><span>La Liga</span><span>Serie A</span><span>Bundesliga</span><span>Ligue 1</span></div><div class="data-route"><span>Fixtures & results</span><span>Match history</span><span>Team form</span><span>Elo estimates</span></div></div>
+        <div class="study-body"><p class="study-lead">From a La Liga tracker to a platform connecting fixtures, standings, and team insights.</p><div><p>A React dashboard sits on a modular Flask API that brings together match data, players, lineups, and news from multiple providers.</p><p>SQLite retains match history beyond the provider’s rolling window. Caching reduces repeated upstream requests, while chronological results feed team-form analysis and an Elo model.</p><div class="study-links"><a href="https://sports-analyzer-chi.vercel.app" target="_blank" rel="noopener noreferrer">Live site ↗</a><a href="https://github.com/rayS2543/sports-analyzer" target="_blank" rel="noopener noreferrer">Source ↗</a></div></div></div>
+        <details class="engineering"><summary>Data sources & model limitations <span aria-hidden="true">+</span></summary><div><p>Provider clients combine football-data.org, API-Football, FotMob lineups, and Google News RSS. Backend pytest and frontend Vitest suites run in GitHub Actions.</p><p>The Elo model processes the previous 90 days of completed matches, with a fixed home-advantage adjustment. Its estimates are two-way and do not include a separate draw probability; predictive accuracy has not been validated.</p></div></details>
+        <p class="technology">React / Flask / SQLite / REST APIs / pytest / Vitest</p>
+      </article>
+    </section>
+    <section id="about" class="about wrap" aria-labelledby="about-title">
+      <div class="section-label"><span class="eyebrow">Background</span><h2 id="about-title">About.</h2></div>
+      <div class="about-copy"><p class="about-intro">Software engineering,<br>from the interface to the system.</p><p>I’m a Computer Science student at Harvey Mudd College, graduating in May 2027. I build full-stack applications and computer vision systems with Python, React, and AWS.</p><p>My projects range from observing cat behavior locally to helping neighbors report stray cats and making football data easier to explore.</p><p>Before these projects, I worked in technical support and operations—troubleshooting devices, coordinating workflows, and helping move a business to a new inventory system.</p><dl class="background-facts"><div><dt>Education</dt><dd>Harvey Mudd College<br>B.S. Computer Science · Expected 2027</dd></div><div><dt>Recognition</dt><dd>HMC Presidential Scholar<br>Hispanic Scholarship Fund Scholar</dd></div></dl></div>
+    </section>
+    <section class="experience wrap" aria-labelledby="experience-title"><div class="section-heading"><h2 id="experience-title">Experience</h2><span>Beyond the projects</span></div><div class="experience-row"><div><h3>Sweetwater Cleaners</h3><span>Key Holder / Sales Associate</span></div><p>Led the move from Liberty POS to SPOT Business Systems and coordinated inventory, customer intake, and vendor workflows.</p><span class="experience-date">2024–2026</span></div><div class="experience-row"><div><h3>Staples</h3><span>Tech Supervisor</span></div><p>Oversaw technology service operations and diagnosed hardware and software issues for customers.</p><span class="experience-date">2023</span></div><div class="experience-row"><div><h3>H.J. Kalikow & Company</h3><span>Assistant Property Manager</span></div><p>Provided IT troubleshooting, device setup, and operational support across multiple properties.</p><span class="experience-date">2021–2023</span></div></section>
+    <footer id="contact" class="contact"><div class="wrap"><div class="contact-heading"><span class="eyebrow">Contact</span><h2>Get in touch.</h2></div><div class="footer-line"><div class="contact-links"><a href="mailto:raymond.siguencia@gmail.com">raymond.siguencia@gmail.com <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/raymond-siguencia-442982255/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/rayS2543" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></div><a href="#top">Back to top <span aria-hidden="true">↑</span></a></div><div class="footer-credit"><span>Raymond Siguenica</span><span>Software Engineer</span></div></div></footer>
+  </main>
+</body>
+</html>

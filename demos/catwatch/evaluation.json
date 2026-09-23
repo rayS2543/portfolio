@@ -1,0 +1,593 @@
+{
+  "a2d": {
+    "classes": [
+      "climbing",
+      "eating",
+      "jumping",
+      "rolling",
+      "running",
+      "walking"
+    ],
+    "dataset": "A2D v1.0 cat primary-action subset",
+    "limitations": [
+      "Clip-level primary-action labels; other actions/actors can co-occur",
+      "No drinking, grooming, sleeping, resting, absent-cat or unknown class",
+      "No evaluation on the user's camera, unseen cat identities, or continuous events",
+      "Whole-frame visual features may exploit scene/background cues",
+      "Source-ID split and exact duplicate checks do not guarantee distinct cat identities or no near-duplicates",
+      "Ridge scores are not calibrated probabilities"
+    ],
+    "majority_baseline_test": {
+      "accuracy": 0.17213115096092224,
+      "confusion_matrix": [
+        [
+          21,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          21,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          21,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          19,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "macro_f1": 0.04895104895104895,
+      "per_class": {
+        "climbing": {
+          "f1": 0.2937062937062937,
+          "precision": 0.1721311475409836,
+          "recall": 1.0,
+          "support": 21
+        },
+        "eating": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "support": 21
+        },
+        "jumping": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "support": 21
+        },
+        "rolling": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "support": 19
+        },
+        "running": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "support": 20
+        },
+        "walking": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "support": 20
+        }
+      }
+    },
+    "manifest_sha256": "a790cfb4cf98f6c048e1df92b4ebcffe56fd6c0797b8d90eff0ba21bef8da0a6",
+    "model": {
+      "alpha": 100.0,
+      "encoder": "ImageNet MobileNetV3 Small (frozen)",
+      "features": "appearance",
+      "frames_per_clip": 12,
+      "head": "class-balanced ridge regression"
+    },
+    "protocol": "Official test split untouched; 20% of official training sources used for validation; select by validation macro-F1",
+    "provenance": {
+      "report": "artifacts/behavior/metrics.json",
+      "report_sha256": "3984d07ad19dd6d83bb036fbb778b8792755a5a33641a66f975470f773049484"
+    },
+    "split_counts": {
+      "test": {
+        "climbing": 21,
+        "eating": 21,
+        "jumping": 21,
+        "rolling": 19,
+        "running": 20,
+        "walking": 20
+      },
+      "train": {
+        "climbing": 67,
+        "eating": 67,
+        "jumping": 66,
+        "rolling": 67,
+        "running": 64,
+        "walking": 66
+      },
+      "val": {
+        "climbing": 17,
+        "eating": 17,
+        "jumping": 17,
+        "rolling": 17,
+        "running": 16,
+        "walking": 17
+      }
+    },
+    "test": {
+      "accuracy": 0.6229507923126221,
+      "confusion_matrix": [
+        [
+          15,
+          0,
+          3,
+          1,
+          0,
+          2
+        ],
+        [
+          0,
+          16,
+          0,
+          5,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          14,
+          3,
+          3,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          16,
+          2,
+          0
+        ],
+        [
+          3,
+          0,
+          5,
+          2,
+          7,
+          3
+        ],
+        [
+          2,
+          0,
+          2,
+          2,
+          6,
+          8
+        ]
+      ],
+      "macro_f1": 0.6164249006354269,
+      "per_class": {
+        "climbing": {
+          "f1": 0.7142857142857143,
+          "precision": 0.7142857142857143,
+          "recall": 0.7142857142857143,
+          "support": 21
+        },
+        "eating": {
+          "f1": 0.8421052631578947,
+          "precision": 0.9411764705882353,
+          "recall": 0.7619047619047619,
+          "support": 21
+        },
+        "jumping": {
+          "f1": 0.6222222222222222,
+          "precision": 0.5833333333333334,
+          "recall": 0.6666666666666666,
+          "support": 21
+        },
+        "rolling": {
+          "f1": 0.6666666666666666,
+          "precision": 0.5517241379310345,
+          "recall": 0.8421052631578947,
+          "support": 19
+        },
+        "running": {
+          "f1": 0.36842105263157887,
+          "precision": 0.3888888888888889,
+          "recall": 0.35,
+          "support": 20
+        },
+        "walking": {
+          "f1": 0.4848484848484849,
+          "precision": 0.6153846153846154,
+          "recall": 0.4,
+          "support": 20
+        }
+      }
+    }
+  },
+  "meow": {
+    "abstention": {
+      "margin_threshold": 0.19778060913085938,
+      "method": "top-two ridge-score margin calibrated on validation",
+      "target_precision": 0.65,
+      "test_accepted": 91,
+      "test_coverage": 0.16758747398853302,
+      "test_selective_accuracy": 0.593406617641449,
+      "validation_accepted": 80,
+      "validation_coverage": 0.14925373134328357,
+      "validation_selective_precision": 0.6499999761581421
+    },
+    "classes": [
+      "climbing",
+      "eating",
+      "grooming",
+      "jumping",
+      "lying/resting",
+      "playing",
+      "sitting",
+      "walking"
+    ],
+    "dataset": "MEOW-10K visually observable video subset",
+    "limitations": [
+      "Labels were published for next-behavior/intention prediction and are used here as dataset labels",
+      "Merged labels are a project taxonomy choice, not an official MEOW-10K evaluation protocol",
+      "Source groups are inferred from filenames; cat identity can still cross splits",
+      "No evaluation on the user's live camera or continuous event boundaries",
+      "Whole-frame features can exploit scene and background cues",
+      "Ridge scores are not calibrated probabilities"
+    ],
+    "majority_baseline_test": {
+      "accuracy": 0.18968692421913147,
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          0,
+          0,
+          32,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          32,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          48,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          32,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          103,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          57,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          93,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          146,
+          0,
+          0,
+          0
+        ]
+      ],
+      "macro_f1": 0.03986068111455108,
+      "per_class": {
+        "climbing": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "support": 32
+        },
+        "eating": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "support": 32
+        },
+        "grooming": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "support": 48
+        },
+        "jumping": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "support": 32
+        },
+        "lying/resting": {
+          "f1": 0.31888544891640863,
+          "precision": 0.18968692449355432,
+          "recall": 1.0,
+          "support": 103
+        },
+        "playing": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "support": 57
+        },
+        "sitting": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "support": 93
+        },
+        "walking": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "support": 146
+        }
+      }
+    },
+    "manifest_sha256": "78fa2c19fab62a2caaa51dde91cbd38dc20d9cf5c0f4bdef6a8dcde6706cc458",
+    "model": {
+      "alpha": 1000.0,
+      "encoder": "ImageNet MobileNetV3 Small (frozen)",
+      "features": "appearance",
+      "frames_per_clip": 4,
+      "head": "class-balanced ridge regression"
+    },
+    "protocol": "SHA-256 group split by inferred original-video ID: 70% train, 15% validation, 15% test",
+    "provenance": {
+      "report": "artifacts/meow10k-behavior/metrics.json",
+      "report_sha256": "316503e8ed4f259a390e9b83d10b03ff983140ee08737e32abe20ff7d3bdf337"
+    },
+    "split_counts": {
+      "test": {
+        "climbing": 32,
+        "eating": 32,
+        "grooming": 48,
+        "jumping": 32,
+        "lying/resting": 103,
+        "playing": 57,
+        "sitting": 93,
+        "walking": 146
+      },
+      "train": {
+        "climbing": 99,
+        "eating": 154,
+        "grooming": 246,
+        "jumping": 113,
+        "lying/resting": 550,
+        "playing": 264,
+        "sitting": 532,
+        "walking": 538
+      },
+      "val": {
+        "climbing": 26,
+        "eating": 28,
+        "grooming": 65,
+        "jumping": 24,
+        "lying/resting": 107,
+        "playing": 46,
+        "sitting": 113,
+        "walking": 127
+      }
+    },
+    "test": {
+      "accuracy": 0.37937384843826294,
+      "confusion_matrix": [
+        [
+          16,
+          0,
+          0,
+          7,
+          1,
+          4,
+          0,
+          4
+        ],
+        [
+          4,
+          6,
+          7,
+          2,
+          2,
+          2,
+          3,
+          6
+        ],
+        [
+          4,
+          4,
+          13,
+          2,
+          14,
+          8,
+          2,
+          1
+        ],
+        [
+          8,
+          1,
+          1,
+          10,
+          1,
+          6,
+          4,
+          1
+        ],
+        [
+          6,
+          5,
+          12,
+          1,
+          49,
+          9,
+          15,
+          6
+        ],
+        [
+          2,
+          7,
+          7,
+          3,
+          6,
+          20,
+          4,
+          8
+        ],
+        [
+          16,
+          5,
+          9,
+          6,
+          15,
+          6,
+          27,
+          9
+        ],
+        [
+          9,
+          11,
+          12,
+          23,
+          10,
+          10,
+          6,
+          65
+        ]
+      ],
+      "macro_f1": 0.33306711475826284,
+      "per_class": {
+        "climbing": {
+          "f1": 0.32989690721649484,
+          "precision": 0.24615384615384617,
+          "recall": 0.5,
+          "support": 32
+        },
+        "eating": {
+          "f1": 0.16901408450704225,
+          "precision": 0.15384615384615385,
+          "recall": 0.1875,
+          "support": 32
+        },
+        "grooming": {
+          "f1": 0.23853211009174313,
+          "precision": 0.21311475409836064,
+          "recall": 0.2708333333333333,
+          "support": 48
+        },
+        "jumping": {
+          "f1": 0.2325581395348837,
+          "precision": 0.18518518518518517,
+          "recall": 0.3125,
+          "support": 32
+        },
+        "lying/resting": {
+          "f1": 0.48756218905472637,
+          "precision": 0.5,
+          "recall": 0.47572815533980584,
+          "support": 103
+        },
+        "playing": {
+          "f1": 0.3278688524590164,
+          "precision": 0.3076923076923077,
+          "recall": 0.3508771929824561,
+          "support": 57
+        },
+        "sitting": {
+          "f1": 0.3506493506493507,
+          "precision": 0.4426229508196721,
+          "recall": 0.2903225806451613,
+          "support": 93
+        },
+        "walking": {
+          "f1": 0.5284552845528454,
+          "precision": 0.65,
+          "recall": 0.4452054794520548,
+          "support": 146
+        }
+      }
+    }
+  }
+}

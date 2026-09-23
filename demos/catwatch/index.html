@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore Catwatch: a local desktop cat-behavior app with trained models, uncertainty handling, and explicit human feedback.">
+  <meta name="theme-color" content="#0b1118">
+  <title>Catwatch — From detection to understanding</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="results.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="#">catwatch<span> / LOCAL VISION</span></a>
+    <nav aria-label="Primary"><a href="#demo">Try the workflow</a><a href="#evidence">Model results</a><a href="../../index.html#work">Portfolio ↗</a></nav>
+  </header>
+  <main id="main">
+    <section class="hero">
+      <div><p class="eyebrow">Independent project / computer vision + desktop engineering</p><h1>Quiet eyes.<br><span>Honest predictions.</span></h1></div>
+      <div class="hero-copy"><p>A local desktop app that detects cats, predicts eight behaviors, and knows when to say <em>uncertain</em>. Built with YOLO, a trained visual classifier, and a human correction workflow.</p><a class="text-link" href="#demo">Explore the current app ↓</a></div>
+    </section>
+    <section id="demo" aria-labelledby="demo-title">
+      <div class="section-heading"><div><p class="eyebrow">The product / interactive walkthrough</p><h2 id="demo-title">A session, from first frame to feedback.</h2></div><span class="badge">Scripted browser demo</span></div>
+      <p class="demo-note">This browser walkthrough mirrors the desktop workflow using an illustration and scripted scores. It never opens your camera or runs a model. Evaluation results below come from actual saved experiments.</p>
+      <div class="console">
+        <div class="observation">
+          <div class="console-bar"><span><span class="dot" id="status-dot"></span> <span id="source-status">PREVIEW OFF</span></span><span>ILLUSTRATED INPUT / NOT FOOTAGE</span></div>
+          <div class="scene">
+            <svg viewBox="0 0 800 470" role="img" aria-label="Illustrated living room used to demonstrate the desktop prediction workflow">
+              <defs><pattern id="floor" width="80" height="55" patternUnits="userSpaceOnUse"><path d="M0 55H80V0" stroke="#253441" fill="none"/></pattern><linearGradient id="wall" x2="0" y2="1"><stop stop-color="#243444"/><stop offset="1" stop-color="#17232e"/></linearGradient></defs>
+              <rect width="800" height="470" fill="url(#wall)"/>
+              <path d="M0 285H800V470H0Z" fill="#18232c"/><path d="M0 285H800V470H0Z" fill="url(#floor)"/>
+              <rect x="68" y="45" width="190" height="156" rx="3" fill="#101b26" stroke="#4c6375" stroke-width="8"/><path d="M164 48V199M71 120H257" stroke="#4c6375" stroke-width="5"/>
+              <path d="M78 192L239 58H251V101L144 192Z" fill="#a1bfce" opacity=".06"/>
+              <rect x="304" y="186" width="340" height="116" rx="20" fill="#3b5061"/><rect x="322" y="205" width="143" height="70" rx="10" fill="#4b6375"/><rect x="478" y="205" width="146" height="70" rx="10" fill="#4b6375"/><rect x="293" y="260" width="366" height="53" rx="13" fill="#344958"/><path d="M316 312V333M633 312V333" stroke="#101820" stroke-width="11"/>
+              <ellipse cx="414" cy="372" rx="210" ry="56" fill="#2a4147"/><ellipse cx="414" cy="372" rx="191" ry="44" stroke="#405b61" fill="none"/>
+              <path d="M706 282V138M706 217Q653 187 675 161Q708 169 706 217M707 185Q751 153 731 121Q706 137 707 185" stroke="#557969" stroke-width="8" fill="#345a4d"/><path d="M680 257H734L726 310H689Z" fill="#687d84"/>
+              <g id="cat" hidden><ellipse cx="0" cy="10" rx="44" ry="28" fill="#b9c6cc"/><circle cx="34" cy="-12" r="23" fill="#cbd4d8"/><path d="M14 -23L14 -51L34 -32L52 -48L56 -17" fill="#cbd4d8"/><path d="M-39 16Q-83 12 -67 -22" stroke="#b9c6cc" stroke-width="12" stroke-linecap="round" fill="none"/><path d="M26 -13h3M43 -13h3" stroke="#203440" stroke-width="4" stroke-linecap="round"/><path d="M-20 26V39M20 25V39" stroke="#b9c6cc" stroke-width="13" stroke-linecap="round"/>
+              <g id="box" hidden><path d="M-82 -37V-65H-55M54 -65H78V-37M78 30V57H52M-56 57H-82V31" stroke="#70e5c1" stroke-width="2" fill="none"/><rect x="-82" y="-91" width="99" height="24" rx="4" fill="#70e5c1"/><text x="-73" y="-75" fill="#0b211b" font-size="12" font-family="monospace">CAT DETECTED</text></g></g>
+            </svg>
+            <div class="off-screen" id="off-screen"><span class="camera-icon">◎</span><h3>Private by default.</h3><p>The desktop app starts with its camera off.<br>Start the demo to explore its workflow.</p></div>
+            <div class="scene-label"><span id="scene-caption">Waiting to start</span><span>SIMULATION</span></div>
+          </div>
+          <div class="playback"><button id="toggle" class="primary">Start demo</button><button id="play" disabled>Play sequence</button><button id="reset" class="quiet">Reset session</button></div>
+          <div class="steps" id="steps" role="group" aria-label="Session stages"></div>
+          <div class="explain"><span class="eyebrow" id="step-count">BEFORE CAPTURE</span><h3 id="step-title">You decide when observation starts.</h3><p id="step-description">The native app processes frames locally. Saving a feedback example requires an explicit click.</p></div>
+        </div>
+        <aside class="rail" aria-label="Prediction and correction controls">
+          <p class="eyebrow">Catwatch / desktop workflow</p><h2>What the model sees.</h2>
+          <div class="privacy" id="privacy">● DEMO OFF · NO CAMERA ACCESS</div>
+          <p class="eyebrow">Current state</p><div class="prediction" id="prediction" role="status">Camera off</div><p id="detail" class="detail">Start the walkthrough to inspect a prediction.</p>
+          <div class="margin"><div><span>Top-two score margin</span><strong id="margin-value">—</strong></div><div class="meter"><div id="margin-fill"></div><span id="threshold-marker"></span></div><small id="margin-caption">Ridge scores are not confidence probabilities.</small></div>
+          <div class="feedback"><label class="eyebrow" for="correction">Teach this camera</label><select id="correction" aria-label="Actual behavior"></select><div class="feedback-actions"><button id="save" disabled>Save as sitting</button><button id="reject" disabled>Wrong behavior</button></div><p class="detail">Try a correction. Demo entries stay in this page’s memory; the desktop app saves a local JPEG and JSONL record. Feedback does not automatically retrain the model.</p></div>
+          <div class="session-head"><p class="eyebrow">This demo session</p><span id="feedback-count">0 corrections</span></div><ol id="history" class="history" aria-label="Session history"><li>Waiting to start</li></ol><p id="feedback-status" class="feedback-status" role="status"></p>
+        </aside>
+      </div>
+    </section>
+    <section id="evidence" class="evidence" aria-labelledby="evidence-title">
+      <div class="section-heading"><div><p class="eyebrow">The evidence / held-out dataset evaluation</p><h2 id="evidence-title">A working model. An explicit baseline.</h2></div><div class="model-switch" role="group" aria-label="Evaluation dataset"><button id="meow" aria-pressed="true">MEOW-10K · desktop model</button><button id="a2d" aria-pressed="false">A2D · research model</button></div></div>
+      <p id="dataset-description"></p>
+      <div class="metrics" id="metrics"></div>
+      <div class="results-grid"><div><h3>Where the model is strongest</h3><p class="detail">Per-class F1 · precision and recall combined · higher is better</p><div id="class-results"></div></div><div class="research-note"><p class="eyebrow">What the numbers mean</p><h3 id="result-title"></h3><p id="result-note"></p><div id="selective"></div><p class="detail">These are clip-level dataset results, not live-camera accuracy. Whole-frame appearance features can learn background cues; the selected pooling does not learn frame order.</p><a class="text-link" href="protocol.html">Read the training protocol →</a></div></div>
+      <details><summary>Result provenance and reproducibility</summary><p>The values shown here are exported from the local experiment reports. The snapshot includes report hashes, split counts, model settings, and evaluation results. No video, weights, or private camera feedback is included.</p><a href="evaluation.json">Inspect the evaluation snapshot</a><p class="detail">Refresh with <code>python scripts/export_demo_results.py</code> after a new evaluated run. The walkthrough’s example scores are scripted separately.</p></details>
+    </section>
+    <section class="engineering" aria-labelledby="engineering-title"><p class="eyebrow">Behind the interface</p><h2 id="engineering-title">Three connected engineering problems.</h2><div class="engineering-grid"><article><span class="index">01 / PERCEPTION</span><h3>Find the cat. Build context.</h3><p>YOLOv8s presence gating and overlapping-box suppression feed a rolling four-frame MobileNetV3 feature window. A three-second presence hold tolerates brief missed detections.</p></article><article><span class="index">02 / DECISION</span><h3>Learn a label. Allow uncertainty.</h3><p>A class-balanced ridge head predicts eight dataset labels. A top-two margin threshold, chosen on validation data, lets the runtime abstain when the scores are too close.</p></article><article><span class="index">03 / FEEDBACK</span><h3>Let a person correct the model.</h3><p>The PySide6 shell exposes Start/Stop, a session timeline, exact-label corrections, and rejection-only feedback. Each explicit feedback click saves one local example.</p></article></div><div class="boundary"><strong>Two runtime paths, clearly separated.</strong><p>The original CLI still supports heuristic behavior events, cross-camera cooldowns, AWS storage, and ntfy alerts. The trained desktop model is a local research preview; its predictions do not drive those alerts.</p></div></section>
+    <section class="next"><div><p class="eyebrow">Current frontier</p><h2>From dataset performance<br>to this cat, in this room.</h2></div><p>The next step is camera-specific evaluation and reviewed feedback, followed by model improvements selected on validation data. Automatic retraining, a feedback review screen, and proven live accuracy remain future work.</p></section>
+    <footer><span>Catwatch / project snapshot · September 2026</span><a href="../../index.html#work">Back to portfolio ↗</a></footer>
+  </main>
+</body>
+</html>

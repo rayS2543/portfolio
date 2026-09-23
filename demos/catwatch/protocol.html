@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Catwatch evaluation protocol.">
+  <title>Catwatch — Training protocol</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .protocol { max-width: 850px; padding-top: 64px; }
+    .protocol h1 { font-size: clamp(38px, 5vw, 64px); }
+    .protocol h2 { margin-top: 46px; }
+    .protocol li { color: var(--muted); margin: 8px 0; }
+    .protocol code { color: var(--mint); font: 12px var(--mono); }
+    .callout { border-left: 2px solid var(--amber); background: var(--panel); padding: 18px 20px; margin: 26px 0; }
+    .callout p { margin: 0; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">catwatch<span> / LOCAL VISION</span></a>
+    <a class="text-link" href="index.html#evidence">← Back to results</a>
+  </header>
+  <main class="protocol">
+    <p class="eyebrow">Catwatch / reproducibility note</p>
+    <h1>How the behavior models were evaluated.</h1>
+    <p>This page travels with the static portfolio demo. It summarizes the evaluated experiments without bundling source video, model weights, private camera feedback, or requiring GitHub access.</p>
+
+    <div class="callout"><p>The desktop app uses the MEOW-10K checkpoint. The A2D experiment is a separate research model. The two results use different labels and splits, so they are not a head-to-head comparison.</p></div>
+
+    <h2>Shared approach</h2>
+    <ul>
+      <li>Frozen ImageNet MobileNetV3 Small visual encoder.</li>
+      <li>Class-balanced ridge-regression classifier fitted on extracted clip features.</li>
+      <li>Candidate pooling modes and ridge strengths selected using validation macro-F1 only.</li>
+      <li>Held-out test results reported after selection, alongside a training-majority baseline.</li>
+      <li>Ridge decision scores are not calibrated probabilities.</li>
+    </ul>
+
+    <h2>MEOW-10K desktop model</h2>
+    <p>The project selected 3,575 unique clips with sufficiently supported visually observable labels, merged into climbing, eating, grooming, jumping, lying/resting, playing, sitting, and walking. Rows inferred to originate from the same source video were assigned to one SHA-256 group split: 2,496 training, 536 validation, and 543 held-out test clips. Exact content duplicates across splits were rejected.</p>
+    <p>The selected configuration averages four uniformly sampled frame features and uses ridge alpha 1000. On the held-out test set it achieved 37.9% accuracy and 0.333 macro-F1, compared with a 19.0% majority baseline.</p>
+    <p>A top-two score-margin threshold was selected on validation for a 65% selective-precision target. On the untouched test set, it accepted 91 of 543 clips (16.8%) at 59.3% accuracy among accepted clips. This is an abstention mechanism, not proof that unknown behaviors are detected.</p>
+
+    <h2>A2D research experiment</h2>
+    <p>This separate six-label task uses climbing, eating, jumping, rolling, running, and walking. It contains 620 domestic-cat primary-action clips: 397 training, 101 validation, and 122 test clips. Official test sources were preserved; 20% of official training sources per class formed validation using a deterministic seed.</p>
+    <p>The selected configuration averages 12 sampled frame features and uses ridge alpha 100. On the official held-out test split it achieved 62.3% accuracy and 0.616 macro-F1, compared with a 17.2% majority baseline.</p>
+
+    <h2>Important limits</h2>
+    <ul>
+      <li>These are clip-level dataset results, not live-camera accuracy.</li>
+      <li>Whole-frame features can exploit scene or background cues; the selected model does not learn frame ordering.</li>
+      <li>Source grouping and exact duplicate checks do not prove independent cat identities or eliminate near duplicates.</li>
+      <li>MEOW-10K labels are a project-specific merged visual taxonomy, not an official benchmark or verified current-action ground truth.</li>
+      <li>The A2D dataset is restricted to noncommercial scientific research.</li>
+    </ul>
+
+    <h2>Reproduce the public snapshot</h2>
+    <p>After generating the local experiment reports, run:</p>
+    <pre><code>python scripts/export_demo_results.py</code></pre>
+    <p>This writes the aggregate snapshot used in the portfolio demo. Its report hashes, split counts, and model settings are visible in <a class="text-link" href="evaluation.json">evaluation.json</a>.</p>
+    <footer><span>Catwatch / project snapshot · September 2026</span><a href="index.html">Portfolio demo →</a></footer>
+  </main>
+</body>
+</html>
