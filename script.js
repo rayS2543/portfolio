@@ -81,3 +81,14 @@ motionButton.addEventListener('click',()=>{paused=!paused;updateMotionButton();r
 reducedMotion.addEventListener('change',()=>{paused=reducedMotion.matches;updateMotionButton();resume();});
 document.addEventListener('visibilitychange',resume);
 updateMotionButton();resize();resume();
+
+document.documentElement.classList.add('js-reveal');
+const revealObserver = new IntersectionObserver(entries=>{
+  for(const entry of entries){
+    if(entry.isIntersecting){
+      entry.target.classList.add('is-visible');
+      revealObserver.unobserve(entry.target);
+    }
+  }
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
