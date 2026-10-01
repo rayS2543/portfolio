@@ -13,7 +13,7 @@ Run `python3 -m http.server 4173 --bind 127.0.0.1` from this directory, then ope
 - match tracker: local `sports-analyzer/README.md`, Flask match route, and React data provider.
 - Education, experience, email, and LinkedIn: `Raymond_Siguencia_Resume_3.docx` in Downloads. Phone number and street/ZIP details are not included.
 
-The original source projects were read only. Copies of the Catwatch walkthrough and Straydar demonstration screenshots are included. Public repository and live-site links for straydar and sports-analyzer were verified on September 23, 2026. Match tracker content reflects the current public repository, including five leagues and the two-way Elo model. Catwatch was not listed publicly; its local walkthrough remains available.
+The original source projects were read only. Copies of the Catwatch walkthrough and Straydar demonstration screenshots are included. The featured Straydar image was captured from the public `/demo` route on September 23, 2026, showing sample map pins and an open lost-cat detail card; its demo label remains visible. Public repository and live-site links for straydar and sports-analyzer were verified on September 23, 2026. Match tracker content reflects the current public repository, including five leagues and the two-way Elo model. Catwatch was not listed publicly; its local walkthrough remains available.
 
 ## Status
 
